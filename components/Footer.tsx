@@ -1,6 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Smartphone, Mail, MessageCircle } from 'lucide-react';
-import { SITE_NAME, SITE_PHONE, SITE_MOBILE, SITE_EMAIL, SITE_ADDRESS, SITE_HOURS } from '@/lib/constants';
+import {
+  SITE_PHONE, SITE_MOBILE, SITE_MOBILE_2, SITE_EMAIL,
+  SITE_ADDRESS, SITE_HOURS, SITE_COMPANY_NO, SITE_LEGAL_NAME, SITE_WHATSAPP,
+} from '@/lib/constants';
 import SocialIcons from './SocialIcons';
 
 export default function Footer() {
@@ -8,17 +12,14 @@ export default function Footer() {
     <footer className="bg-surface">
       {/* Logo + Contact */}
       <div className="text-center py-12 px-4">
-        <div className="mb-8">
-          <span className="text-3xl font-bold tracking-[0.25em] text-white uppercase">
-            {SITE_NAME.split(' ')[0] || SITE_NAME}
-          </span>
-          {SITE_NAME.split(' ').length > 1 && (
-            <div className="mt-1">
-              <span className="text-xs font-semibold tracking-[0.3em] text-white uppercase bg-white/10 px-3 py-1 inline-block">
-                {SITE_NAME.split(' ').slice(1).join(' ')}
-              </span>
-            </div>
-          )}
+        <div className="mb-8 flex justify-center">
+          <Image
+            src="/logo.png"
+            alt="KY Automotive"
+            width={200}
+            height={80}
+            className="h-16 w-auto"
+          />
         </div>
 
         {/* Contact row */}
@@ -29,10 +30,13 @@ export default function Footer() {
           <a href={`tel:${SITE_MOBILE.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-white transition-colors">
             <Smartphone size={16} /> {SITE_MOBILE}
           </a>
+          <a href={`tel:${SITE_MOBILE_2.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-white transition-colors">
+            <Smartphone size={16} /> {SITE_MOBILE_2}
+          </a>
           <a href={`mailto:${SITE_EMAIL}`} className="flex items-center gap-2 hover:text-white transition-colors">
             <Mail size={16} /> Email Us
           </a>
-          <a href="#" className="flex items-center gap-2 hover:text-white transition-colors">
+          <a href={`https://wa.me/44${SITE_WHATSAPP.slice(1)}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
             <MessageCircle size={16} /> WhatsApp Us
           </a>
         </div>
@@ -41,7 +45,8 @@ export default function Footer() {
         <div className="text-secondary text-sm space-y-0.5 mb-8">
           <p>{SITE_ADDRESS.line1}</p>
           <p>{SITE_ADDRESS.line2}</p>
-          <p>{SITE_ADDRESS.line3} {SITE_ADDRESS.postcode}</p>
+          {SITE_ADDRESS.line3 && <p>{SITE_ADDRESS.line3}</p>}
+          <p>{SITE_ADDRESS.postcode}</p>
         </div>
       </div>
 
@@ -51,14 +56,11 @@ export default function Footer() {
           <span className="font-semibold text-white">Our Opening Times</span>
           <span className="hidden md:block text-accent">|</span>
           <span className="text-secondary">
-            mon &ndash; sat. <span className="font-semibold text-white">{SITE_HOURS.weekdays}</span>
-          </span>
-          <span className="text-secondary">
-            sun. <span className="font-semibold text-white">{SITE_HOURS.sunday}</span>
+            Everyday: <span className="font-semibold text-white">{SITE_HOURS.weekdays}</span>
           </span>
         </div>
         <p className="text-center text-xs text-secondary mt-3 max-w-2xl mx-auto">
-          For a personalised experience and to guarantee our undivided attention, please contact us by phone to arrange an appointment before your visit.
+          Customers are welcome to book appointments and test drives. Please contact us by phone to arrange your visit.
         </p>
       </div>
 
@@ -70,12 +72,12 @@ export default function Footer() {
 
         <p className="text-xs text-secondary max-w-4xl mx-auto mb-4 leading-relaxed">
           All finance is subject to status and income. Written Quotation on request. We act as a credit broker
-          not a lender. We work with a number of carefully selected credit providers who may be able to offer you
-          finance for your purchase.
+          not a lender. We work with a number of carefully selected credit providers including Zuto, Close Brothers,
+          and Motonova who may be able to offer you finance for your purchase.
         </p>
 
         <p className="text-xs text-secondary mb-6">
-          {SITE_NAME} Limited &nbsp;|&nbsp; Company No. 00000000
+          {SITE_LEGAL_NAME} &nbsp;|&nbsp; Company No. {SITE_COMPANY_NO}
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 text-xs text-secondary">

@@ -8,6 +8,7 @@ import FeaturedSection from '@/components/FeaturedSection';
 import ReviewsSection from '@/components/ReviewsSection';
 import TrustBadges from '@/components/TrustBadges';
 import CTABanners from '@/components/CTABanners';
+import SEOSection from '@/components/SEOSection';
 import { createClient } from '@/lib/supabase-server';
 import type { Vehicle } from '@/lib/types';
 
@@ -41,6 +42,7 @@ export default async function Home() {
       <ReviewsSection />
       <TrustBadges />
       <CTABanners />
+      <SEOSection />
     </>
   );
 }

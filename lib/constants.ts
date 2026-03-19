@@ -1,17 +1,23 @@
-export const SITE_NAME = 'Motor Company';
-export const SITE_PHONE = '01234 567890';
-export const SITE_MOBILE = '07123 456789';
-export const SITE_EMAIL = 'sales@example.com';
+export const SITE_NAME = 'KY Automotive';
+export const SITE_TAGLINE = 'Drive Luxury. Pay Less.';
+export const SITE_PHONE = '01895 754 253';
+export const SITE_MOBILE = '07543 432 927';
+export const SITE_MOBILE_2 = '07983 244 711';
+export const SITE_EMAIL = 'sales@kyautomotive.co.uk';
+export const SITE_WHATSAPP = '07543432927';
 export const SITE_ADDRESS = {
-  line1: 'Unit 1 Example Road',
-  line2: 'Example Town',
-  line3: 'County',
-  postcode: 'AB1 2CD',
+  line1: 'Unit 3, Riverside Business Park',
+  line2: 'The Common, West Drayton',
+  line3: '',
+  postcode: 'UB7 7HQ',
 };
 export const SITE_HOURS = {
-  weekdays: '09:00 am - 06:00 pm',
-  sunday: 'Closed',
+  weekdays: '08:00 am - 08:00 pm',
+  sunday: '08:00 am - 08:00 pm',
 };
+export const SITE_DOMAIN = 'www.kyautomotive.co.uk';
+export const SITE_COMPANY_NO = '15062795';
+export const SITE_LEGAL_NAME = 'K Rahman Ltd trading as KY Automotive';
 
 export const MAKES = [
   'Audi', 'BMW', 'Ford', 'Honda', 'Hyundai', 'Jaguar', 'Kia',

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const checkpoints = [
   'Flexible finance options',
-  'Working with reputable lenders',
+  'Working with Zuto, Close Brothers & Motonova',
   'Free finance check',
   'Get instant results',
 ];

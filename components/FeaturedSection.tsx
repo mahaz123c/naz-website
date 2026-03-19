@@ -3,83 +3,34 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, Settings, Gauge, Fuel, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
-import { SITE_NAME } from '@/lib/constants';
 import { formatPrice, formatMonthly, formatMileage } from '@/lib/utils';
 import type { Vehicle } from '@/lib/types';
 
-// Demo vehicles for when Supabase isn't connected
+// Demo vehicles for when Supabase isn't connected or DB is empty
 const demoVehicles: Vehicle[] = [
   {
-    id: '1',
-    make: 'BMW',
-    model: 'iX3',
-    year: 2023,
-    price: 22990,
-    mileage: 57111,
-    fuel_type: 'Electric',
-    transmission: 'Automatic',
-    body_type: 'SUV',
-    colour: 'Black',
-    doors: 5,
-    engine_size: null,
-    horsepower: 286,
-    monthly_price: 342.91,
-    description: null,
-    features: [],
+    id: '1', make: 'BMW', model: 'iX3', year: 2023, price: 22990, mileage: 57111,
+    fuel_type: 'Electric', transmission: 'Automatic', body_type: 'SUV', colour: 'Black',
+    doors: 5, engine_size: null, horsepower: 286, monthly_price: 342.91,
+    description: null, features: [],
     images: ['https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80'],
-    status: 'available',
-    featured: true,
-    slug: '2023-bmw-ix3-demo1',
-    created_at: '',
-    updated_at: '',
+    status: 'available', featured: true, slug: '2023-bmw-ix3-demo1', created_at: '', updated_at: '',
   },
   {
-    id: '2',
-    make: 'Mercedes-Benz',
-    model: 'C-Class',
-    year: 2022,
-    price: 28990,
-    mileage: 32000,
-    fuel_type: 'Diesel',
-    transmission: 'Automatic',
-    body_type: 'Saloon',
-    colour: 'Silver',
-    doors: 4,
-    engine_size: '2.0L',
-    horsepower: 200,
-    monthly_price: 429.00,
-    description: null,
-    features: [],
+    id: '2', make: 'Mercedes-Benz', model: 'C-Class', year: 2022, price: 28990, mileage: 32000,
+    fuel_type: 'Diesel', transmission: 'Automatic', body_type: 'Saloon', colour: 'Silver',
+    doors: 4, engine_size: '2.0L', horsepower: 200, monthly_price: 429.00,
+    description: null, features: [],
     images: ['https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80'],
-    status: 'available',
-    featured: true,
-    slug: '2022-mercedes-c-class-demo2',
-    created_at: '',
-    updated_at: '',
+    status: 'available', featured: true, slug: '2022-mercedes-c-class-demo2', created_at: '', updated_at: '',
   },
   {
-    id: '3',
-    make: 'Audi',
-    model: 'A4',
-    year: 2023,
-    price: 26500,
-    mileage: 18500,
-    fuel_type: 'Petrol',
-    transmission: 'Automatic',
-    body_type: 'Saloon',
-    colour: 'White',
-    doors: 4,
-    engine_size: '2.0L',
-    horsepower: 204,
-    monthly_price: 389.00,
-    description: null,
-    features: [],
+    id: '3', make: 'Audi', model: 'A4', year: 2023, price: 26500, mileage: 18500,
+    fuel_type: 'Petrol', transmission: 'Automatic', body_type: 'Saloon', colour: 'White',
+    doors: 4, engine_size: '2.0L', horsepower: 204, monthly_price: 389.00,
+    description: null, features: [],
     images: ['https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=80'],
-    status: 'available',
-    featured: true,
-    slug: '2023-audi-a4-demo3',
-    created_at: '',
-    updated_at: '',
+    status: 'available', featured: true, slug: '2023-audi-a4-demo3', created_at: '', updated_at: '',
   },
 ];
 
@@ -100,14 +51,14 @@ export default function FeaturedSection({ vehicles }: FeaturedSectionProps) {
       {/* Watermark */}
       <div className="absolute inset-0 flex items-start justify-center pt-4 pointer-events-none">
         <span className="text-[8rem] md:text-[12rem] font-bold text-white/[0.03] uppercase tracking-wider whitespace-nowrap">
-          {SITE_NAME}
+          KY AUTOMOTIVE
         </span>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-bold text-white text-center mb-12">
-          Family-run Independent<br />Dealership
+          Family-Run Dealership<br />Near Heathrow, London
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -115,7 +66,7 @@ export default function FeaturedSection({ vehicles }: FeaturedSectionProps) {
           <div className="relative bg-white rounded-lg overflow-hidden">
             {/* Logo overlay */}
             <div className="absolute top-4 left-4 z-10 bg-white/90 px-3 py-1">
-              <span className="text-sm font-bold tracking-wider text-black uppercase">{SITE_NAME}</span>
+              <span className="text-sm font-bold tracking-wider text-black uppercase">KY Automotive</span>
             </div>
 
             {/* Image */}

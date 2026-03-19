@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, MessageCircle, Search, Menu, X } from 'lucide-react';
-import { SITE_NAME, SITE_PHONE } from '@/lib/constants';
+import { SITE_PHONE } from '@/lib/constants';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -36,15 +37,15 @@ export default function Navbar() {
         </div>
 
         {/* Center: Logo */}
-        <Link href="/" className="flex flex-col items-center">
-          <span className="text-xl md:text-2xl font-bold tracking-[0.25em] text-white uppercase">
-            {SITE_NAME.split(' ')[0] || SITE_NAME}
-          </span>
-          {SITE_NAME.split(' ').length > 1 && (
-            <span className="text-[10px] md:text-xs font-semibold tracking-[0.3em] text-white uppercase bg-white/10 px-2 py-0.5">
-              {SITE_NAME.split(' ').slice(1).join(' ')}
-            </span>
-          )}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="KY Automotive"
+            width={120}
+            height={48}
+            className="h-10 md:h-12 w-auto"
+            priority
+          />
         </Link>
 
         {/* Right: Nav links */}

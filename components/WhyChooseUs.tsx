@@ -1,35 +1,53 @@
 'use client';
 
 import { useState } from 'react';
-import { ShieldCheck, Truck, Search, Wrench, PoundSterling, Clock, Award, Handshake } from 'lucide-react';
+import { ShieldCheck, Truck, Search, PoundSterling, Clock, Handshake, Car, Award } from 'lucide-react';
 
 const tabs = [
   {
     label: 'Why buy from us?',
     features: [
       {
-        Icon: ShieldCheck,
-        title: 'Extended Warranty',
+        Icon: Search,
+        title: '150-Point Vehicle Inspection',
         description:
-          'Rest easy knowing that your dream car comes with a comprehensive warranty, ensuring peace of mind on the road. As an extra perk, we cover the MOT costs for the lifetime of your vehicle.',
+          'Every car undergoes a detailed 150-point mechanical and safety inspection to ensure it meets our strict quality standards.',
+      },
+      {
+        Icon: ShieldCheck,
+        title: '6-Month Warranty Included',
+        description:
+          'We are confident in our vehicles, which is why every car comes with a 6-month warranty for your peace of mind.',
+      },
+      {
+        Icon: Car,
+        title: 'Affordable Luxury & Sporty Vehicles',
+        description:
+          'We specialise in stylish, performance-driven cars at competitive prices, giving you premium vehicles without the premium price tag.',
+      },
+      {
+        Icon: PoundSterling,
+        title: 'Flexible Finance Available',
+        description:
+          'We work with finance providers including Zuto, Close Brothers, and Motonova to help you find flexible payment options that suit your budget.',
+      },
+      {
+        Icon: Handshake,
+        title: 'Part Exchange Welcome',
+        description:
+          'Looking to upgrade? We offer competitive part exchange valuations on your current vehicle.',
       },
       {
         Icon: Truck,
         title: 'Nationwide Delivery',
         description:
-          'Choose convenience with our online buying option. Buy your desired car from the comfort of your home, and we\'ll deliver it right to your doorstep, anywhere in the UK.',
+          'Based near Heathrow, London, but we deliver vehicles nationwide, making it easy to buy from anywhere in the UK.',
       },
       {
-        Icon: Search,
-        title: 'Meticulous Pre-Delivery Inspection',
+        Icon: Award,
+        title: 'Family-Run & Customer Focused',
         description:
-          'Every car in our showroom undergoes a rigorous pre-delivery inspection by our expert technicians. This ensures that your chosen vehicle is in top-notch condition before you take ownership.',
-      },
-      {
-        Icon: Wrench,
-        title: 'Service Plans',
-        description:
-          'We believe in taking care of our customers even after the purchase. Our service plans offer hassle-free maintenance to keep your car in top condition throughout its life.',
+          'With over 10 years of experience, we pride ourselves on honest advice, transparency, and excellent customer service.',
       },
     ],
   },
@@ -40,13 +58,13 @@ const tabs = [
         Icon: PoundSterling,
         title: 'Competitive Valuations',
         description:
-          'We offer fair and competitive prices for your vehicle. Get an instant online valuation or bring your car to us for an in-person assessment.',
+          'We offer fair and competitive prices for your vehicle. Get a valuation or bring your car to us for an in-person assessment.',
       },
       {
         Icon: Clock,
         title: 'Quick & Easy Process',
         description:
-          'Sell your car in as little as 30 minutes. Our streamlined process means less hassle and faster payment directly to your bank account.',
+          'Our streamlined process means less hassle and faster payment directly to your bank account.',
       },
       {
         Icon: Handshake,
@@ -58,7 +76,7 @@ const tabs = [
         Icon: Award,
         title: 'Trusted Dealer',
         description:
-          'With thousands of satisfied customers and top ratings across all major review platforms, you can trust us to give you the best deal.',
+          'With over 10 years of experience and countless satisfied customers, you can trust us to give you the best deal.',
       },
     ],
   },
@@ -66,28 +84,28 @@ const tabs = [
     label: 'Why finance with us?',
     features: [
       {
-        Icon: ShieldCheck,
-        title: 'FCA Regulated',
-        description:
-          'We are authorised and regulated by the Financial Conduct Authority, ensuring your finance application is handled professionally and responsibly.',
-      },
-      {
         Icon: PoundSterling,
         title: 'Competitive Rates',
         description:
-          'We work with a panel of trusted lenders to find you the most competitive finance rates available, tailored to your budget.',
+          'We work with Zuto, Close Brothers, and Motonova to find you the most competitive finance rates available.',
       },
       {
         Icon: Clock,
         title: 'Quick Decisions',
         description:
-          'Apply online and receive a decision in minutes. Our soft credit check won\'t affect your credit score.',
+          'Apply and receive a decision quickly. Our soft credit check won\'t affect your credit score.',
       },
       {
         Icon: Handshake,
         title: 'Flexible Terms',
         description:
           'Choose from a range of flexible finance options including PCP, HP, and personal loans to suit your individual needs.',
+      },
+      {
+        Icon: ShieldCheck,
+        title: 'Transparent Process',
+        description:
+          'No hidden fees or surprises. We walk you through every step of the finance process with full transparency.',
       },
     ],
   },

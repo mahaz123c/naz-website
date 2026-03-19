@@ -15,10 +15,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} | Premium Used Cars`,
+    default: `${SITE_NAME} | Affordable Luxury & Performance Cars | Heathrow, London`,
     template: `%s | ${SITE_NAME}`,
   },
-  description: `${SITE_NAME} - Specialist high specification used car dealer. Browse our extensive range of premium vehicles, apply for finance, or sell your car.`,
+  description: 'KY Automotive - Family-run car dealership near Heathrow, London. Affordable luxury and sporty vehicles with 150-point inspection, 6-month warranty, flexible finance, and nationwide delivery.',
 };
 
 export default function RootLayout({
