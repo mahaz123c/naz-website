@@ -30,6 +30,21 @@ export const FUEL_TYPES = ['Petrol', 'Diesel', 'Hybrid', 'Electric'];
 export const BODY_TYPES = ['Saloon', 'SUV', 'Coupe', 'Hatchback', 'Convertible', 'Estate', 'Van'];
 export const TRANSMISSIONS = ['Automatic', 'Manual'];
 
+export const FINANCE_PARTNERS = [
+  {
+    name: 'Zuto',
+    description: 'Compare car finance deals from a panel of lenders. Soft credit check that won\'t affect your credit score.',
+    url: 'https://www.zuto.com',
+    cta: 'Check Eligibility with Zuto',
+  },
+  {
+    name: 'MotoNovo Finance',
+    description: 'Flexible car finance options including PCP and HP. Apply online and get a quick decision.',
+    url: 'https://www.motonovofinance.com',
+    cta: 'Check Eligibility with MotoNovo',
+  },
+];
+
 export const BUDGET_OPTIONS = [
   { label: 'Up to \u00a3400', max: 400 },
   { label: 'Up to \u00a3600', max: 600 },

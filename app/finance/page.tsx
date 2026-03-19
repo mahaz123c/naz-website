@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Scale, Check, ShieldCheck, Clock, PoundSterling, Handshake } from 'lucide-react';
-import { SITE_PHONE } from '@/lib/constants';
+import { Scale, Check, ShieldCheck, Clock, PoundSterling, Handshake, ArrowUpRight } from 'lucide-react';
+import { SITE_PHONE, FINANCE_PARTNERS } from '@/lib/constants';
 
 export const metadata = {
   title: 'Car Finance',
@@ -36,8 +36,34 @@ export default function FinancePage() {
         </div>
       </div>
 
-      {/* Benefits */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-16">
+        {/* Finance Partner Cards */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-semibold text-white text-center mb-3">Check Your Eligibility</h2>
+          <p className="text-secondary text-sm text-center mb-8 max-w-2xl mx-auto">
+            We work with trusted finance partners to help you find the best deal. Click below to check your eligibility — it only takes a few minutes and won&apos;t affect your credit score.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {FINANCE_PARTNERS.map((partner) => (
+              <div key={partner.name} className="bg-surface border border-border rounded-lg p-8 flex flex-col items-center text-center">
+                <h3 className="text-xl font-bold text-white mb-3">{partner.name}</h3>
+                <p className="text-sm text-secondary mb-6 leading-relaxed">{partner.description}</p>
+                <a
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-accent text-black px-6 py-3 font-semibold text-sm rounded-lg hover:bg-accent-hover transition-colors"
+                >
+                  {partner.cta}
+                  <ArrowUpRight size={16} />
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Benefits */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {benefits.map(({ Icon, title, desc }) => (
             <div key={title} className="bg-surface border border-border rounded-lg p-6 flex gap-4">
@@ -56,7 +82,7 @@ export default function FinancePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { step: '1', title: 'Choose Your Car', desc: 'Browse our stock and find the perfect vehicle for you.' },
-              { step: '2', title: 'Apply for Finance', desc: 'Complete our quick application. It won\'t affect your credit score.' },
+              { step: '2', title: 'Check Your Eligibility', desc: 'Apply with Zuto or MotoNovo above. A soft check won\'t affect your credit score.' },
               { step: '3', title: 'Drive Away', desc: 'Once approved, we\'ll arrange everything so you can drive away happy.' },
             ].map((item) => (
               <div key={item.step} className="text-center">
@@ -72,9 +98,9 @@ export default function FinancePage() {
 
         {/* CTA */}
         <div className="mt-16 bg-surface border border-border rounded-lg p-8 text-center">
-          <h2 className="text-xl font-semibold text-white mb-3">Ready to Apply?</h2>
+          <h2 className="text-xl font-semibold text-white mb-3">Need Help With Finance?</h2>
           <p className="text-secondary text-sm mb-6">
-            Contact us to discuss your finance options or browse our stock to find your perfect vehicle.
+            Not sure which option is right for you? Give us a call and our team will help you find the best finance deal for your budget.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/stock" className="bg-accent text-black px-6 py-3 font-semibold text-sm rounded-lg hover:bg-accent-hover transition-colors">
