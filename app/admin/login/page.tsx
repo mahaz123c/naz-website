@@ -2,40 +2,36 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { LogIn } from 'lucide-react';
 import { createClient } from '@/lib/supabase-client';
 import { SITE_NAME } from '@/lib/constants';
 
 export default function AdminLoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const [error, setError] = useState('');
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    try {
-      const supabase = createClient();
-      const { error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+    const supabase = createClient();
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-      if (authError) {
-        setError(authError.message);
-        setLoading(false);
-        return;
-      }
-
-      router.push('/admin');
-      router.refresh();
-    } catch {
-      setError('An unexpected error occurred');
+    if (authError) {
+      setError(authError.message);
       setLoading(false);
+      return;
     }
+
+    router.push('/admin');
+    router.refresh();
   }
 
   return (
@@ -48,25 +44,33 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleSubmit} className="bg-surface border border-border rounded-lg p-6 space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm text-secondary mb-1">Email</label>
+            <label htmlFor="email" className="block text-sm text-secondary mb-1">
+              Email address
+            </label>
             <input
               id="email"
               type="email"
+              inputMode="email"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/40"
+              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-base text-white focus:outline-none focus:border-white/40"
+              placeholder="you@example.com"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm text-secondary mb-1">Password</label>
+            <label htmlFor="password" className="block text-sm text-secondary mb-1">
+              Password
+            </label>
             <input
               id="password"
               type="password"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/40"
+              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-base text-white focus:outline-none focus:border-white/40"
             />
           </div>
 
@@ -75,9 +79,10 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-accent text-black py-2.5 font-semibold rounded-lg hover:bg-accent-hover transition-colors disabled:opacity-50 text-sm"
+            className="w-full inline-flex items-center justify-center gap-2 bg-accent text-black py-3 font-semibold rounded-lg hover:bg-accent-hover transition-colors disabled:opacity-50 text-sm"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            <LogIn size={16} />
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
       </div>

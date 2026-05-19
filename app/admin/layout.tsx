@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-client';
-import { LayoutDashboard, Car, MessageSquare, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Car, MessageSquare, HelpCircle, LogOut, Menu, X } from 'lucide-react';
 import { SITE_NAME } from '@/lib/constants';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', Icon: LayoutDashboard },
   { href: '/admin/vehicles', label: 'Vehicles', Icon: Car },
   { href: '/admin/enquiries', label: 'Enquiries', Icon: MessageSquare },
+  { href: '/admin/help', label: 'Help', Icon: HelpCircle },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

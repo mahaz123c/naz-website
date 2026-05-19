@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MessageCircle, Search, Menu, X } from 'lucide-react';
+import { Phone, Mail, MessageCircle, Search, Menu, X, Lock } from 'lucide-react';
 import { SITE_PHONE } from '@/lib/constants';
 
 export default function Navbar() {
@@ -109,6 +109,15 @@ export default function Navbar() {
             <a href="#" className="flex items-center gap-2">
               <MessageCircle size={14} /> Chat
             </a>
+          </div>
+          <div className="pt-4 border-t border-border">
+            <Link
+              href="/admin/login"
+              className="flex items-center gap-2 text-xs text-secondary hover:text-accent transition-colors"
+              onClick={() => setMobileOpen(false)}
+            >
+              <Lock size={12} /> Staff Login
+            </Link>
           </div>
         </div>
       )}
