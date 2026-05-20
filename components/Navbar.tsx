@@ -81,9 +81,9 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Dropdown menu (mobile hamburger + desktop Menu button) */}
       {mobileOpen && (
-        <div className="lg:hidden bg-surface border-t border-border px-4 py-6 space-y-4">
+        <div className="bg-surface border-t border-border px-4 py-6 space-y-4">
           <Link href="/stock" className="block text-white font-medium py-2" onClick={() => setMobileOpen(false)}>
             Buy
           </Link>
