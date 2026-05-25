@@ -43,7 +43,7 @@ export default function Navbar() {
             alt="KY Automotive"
             width={120}
             height={48}
-            className="h-14 md:h-20 w-auto"
+            className="h-20 md:h-[104px] -my-3 w-auto"
             priority
           />
         </Link>
