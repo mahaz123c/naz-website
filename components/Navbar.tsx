@@ -10,27 +10,27 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-surface">
+    <header className="sticky top-0 z-50 bg-white">
       {/* Single nav row */}
       <div className="flex items-center justify-between px-4 md:px-8 py-3">
         {/* Left: Contact info (hidden on mobile) */}
         <div className="hidden lg:flex items-center gap-4 text-sm text-secondary">
-          <a href={`tel:${SITE_PHONE.replace(/\s/g, '')}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
+          <a href={`tel:${SITE_PHONE.replace(/\s/g, '')}`} className="flex items-center gap-1.5 hover:text-accent transition-colors">
             <Phone size={14} />
             <span>{SITE_PHONE}</span>
           </a>
           <span className="text-border">|</span>
-          <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors">
+          <a href="#" className="flex items-center gap-1.5 hover:text-accent transition-colors">
             <Mail size={14} />
             <span>Sales</span>
           </a>
           <span className="text-border">|</span>
-          <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors">
+          <a href="#" className="flex items-center gap-1.5 hover:text-accent transition-colors">
             <Mail size={14} />
             <span>Aftersales</span>
           </a>
           <span className="text-border">|</span>
-          <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors">
+          <a href="#" className="flex items-center gap-1.5 hover:text-accent transition-colors">
             <MessageCircle size={14} />
             <span>Chat</span>
           </a>
@@ -50,22 +50,22 @@ export default function Navbar() {
 
         {/* Right: Nav links */}
         <div className="hidden lg:flex items-center gap-8">
-          <Link href="/stock" className="text-sm font-medium text-white hover:text-accent transition-colors">
+          <Link href="/stock" className="text-sm font-medium text-background hover:text-accent transition-colors">
             Buy
           </Link>
-          <Link href="/finance" className="text-sm font-medium text-white hover:text-accent transition-colors">
+          <Link href="/finance" className="text-sm font-medium text-background hover:text-accent transition-colors">
             Finance
           </Link>
-          <Link href="/sell-your-car" className="text-sm font-medium text-white hover:text-accent transition-colors">
+          <Link href="/sell-your-car" className="text-sm font-medium text-background hover:text-accent transition-colors">
             Sell
           </Link>
           <span className="text-border">|</span>
-          <Link href="/stock" className="text-white hover:text-accent transition-colors">
+          <Link href="/stock" className="text-background hover:text-accent transition-colors">
             <Search size={18} />
           </Link>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex items-center gap-2 text-sm font-medium text-white hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-background hover:text-accent transition-colors"
           >
             Menu
             <Menu size={18} />
@@ -75,7 +75,7 @@ export default function Navbar() {
         {/* Mobile: hamburger */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-white"
+          className="lg:hidden text-background"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -83,20 +83,20 @@ export default function Navbar() {
 
       {/* Dropdown menu (mobile hamburger + desktop Menu button) */}
       {mobileOpen && (
-        <div className="bg-surface border-t border-border px-4 py-6 space-y-4">
-          <Link href="/stock" className="block text-white font-medium py-2" onClick={() => setMobileOpen(false)}>
+        <div className="bg-white border-t border-border px-4 py-6 space-y-4">
+          <Link href="/stock" className="block text-background font-medium py-2" onClick={() => setMobileOpen(false)}>
             Buy
           </Link>
-          <Link href="/finance" className="block text-white font-medium py-2" onClick={() => setMobileOpen(false)}>
+          <Link href="/finance" className="block text-background font-medium py-2" onClick={() => setMobileOpen(false)}>
             Finance
           </Link>
-          <Link href="/sell-your-car" className="block text-white font-medium py-2" onClick={() => setMobileOpen(false)}>
+          <Link href="/sell-your-car" className="block text-background font-medium py-2" onClick={() => setMobileOpen(false)}>
             Sell
           </Link>
-          <Link href="/about" className="block text-white font-medium py-2" onClick={() => setMobileOpen(false)}>
+          <Link href="/about" className="block text-background font-medium py-2" onClick={() => setMobileOpen(false)}>
             About
           </Link>
-          <Link href="/contact" className="block text-white font-medium py-2" onClick={() => setMobileOpen(false)}>
+          <Link href="/contact" className="block text-background font-medium py-2" onClick={() => setMobileOpen(false)}>
             Contact
           </Link>
           <div className="pt-4 border-t border-border space-y-3 text-sm text-secondary">
