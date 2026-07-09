@@ -52,11 +52,11 @@ export default function Navbar() {
       {/* Main bar */}
       <div className="container-px flex h-16 md:h-[72px] items-center justify-between">
         {/* Logo + wordmark — large but clearly contained within the bar */}
-        <Link href="/" className="flex items-center gap-3 shrink-0">
+        <Link href="/" className="flex items-center gap-4 shrink-0">
           <Image
-            src="/logo-mark.png"
+            src="/logo-ky.png"
             alt="KY Automotive"
-            width={91}
+            width={109}
             height={64}
             className="h-14 md:h-16 w-auto object-contain"
             priority
