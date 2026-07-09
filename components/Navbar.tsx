@@ -51,14 +51,14 @@ export default function Navbar() {
 
       {/* Main bar */}
       <div className="container-px flex h-16 md:h-[72px] items-center justify-between">
-        {/* Logo + wordmark — the emblem fills the full bar height */}
+        {/* Logo + wordmark — large but clearly contained within the bar */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <Image
-            src="/logo.png"
+            src="/logo-mark.png"
             alt="KY Automotive"
-            width={103}
-            height={72}
-            className="h-16 md:h-[72px] w-auto object-contain"
+            width={91}
+            height={64}
+            className="h-14 md:h-16 w-auto object-contain"
             priority
           />
           <span className="hidden sm:block">

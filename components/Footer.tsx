@@ -32,10 +32,10 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3 mb-5">
             <Image
-              src="/logo.png"
+              src="/logo-mark.png"
               alt="KY Automotive"
-              width={72}
-              height={48}
+              width={80}
+              height={56}
               className="h-14 w-auto object-contain"
             />
             <span>
