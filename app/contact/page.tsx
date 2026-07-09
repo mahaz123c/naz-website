@@ -4,6 +4,7 @@ import PageHeader from '@/components/PageHeader';
 import Reveal from '@/components/Reveal';
 import {
   SITE_NAME, SITE_PHONE, SITE_MOBILE, SITE_EMAIL, SITE_ADDRESS, SITE_HOURS, SITE_WHATSAPP,
+  SITE_INSTAGRAM, SITE_INSTAGRAM_HANDLE,
 } from '@/lib/constants';
 
 export const metadata = {
@@ -21,7 +22,7 @@ export default function ContactPage() {
     { Icon: Smartphone, label: 'Mobile', value: SITE_MOBILE, href: `tel:${SITE_MOBILE.replace(/\s/g, '')}` },
     { Icon: MessageCircle, label: 'WhatsApp', value: 'Message us', href: `https://wa.me/44${SITE_WHATSAPP.slice(1)}` },
     { Icon: Mail, label: 'Email', value: SITE_EMAIL, href: `mailto:${SITE_EMAIL}` },
-    { Icon: Instagram, label: 'Instagram', value: '@kyautomotive', href: '#' },
+    { Icon: Instagram, label: 'Instagram', value: SITE_INSTAGRAM_HANDLE, href: SITE_INSTAGRAM },
     {
       Icon: MapPin,
       label: 'Find us',

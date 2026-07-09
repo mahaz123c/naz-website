@@ -5,6 +5,8 @@ export const SITE_MOBILE = '07543 432 927';
 export const SITE_MOBILE_2 = '07983 244 711';
 export const SITE_EMAIL = 'sales@kyautomotive.co.uk';
 export const SITE_WHATSAPP = '07543432927';
+export const SITE_INSTAGRAM = 'https://www.instagram.com/ky_automotiveltd/';
+export const SITE_INSTAGRAM_HANDLE = '@ky_automotiveltd';
 export const SITE_ADDRESS = {
   line1: 'Unit 3, Riverside Business Park',
   line2: 'The Common, West Drayton',

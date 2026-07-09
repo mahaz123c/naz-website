@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Phone, Mail, MessageCircle, MapPin, Instagram } from 'lucide-react';
 import {
   SITE_PHONE, SITE_MOBILE, SITE_EMAIL, SITE_ADDRESS, SITE_HOURS,
-  SITE_COMPANY_NO, SITE_LEGAL_NAME, SITE_WHATSAPP,
+  SITE_COMPANY_NO, SITE_LEGAL_NAME, SITE_WHATSAPP, SITE_INSTAGRAM,
 } from '@/lib/constants';
 
 const exploreLinks = [
@@ -54,7 +54,9 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-3">
             <a
-              href="#"
+              href={SITE_INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Instagram"
               className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-white/50 transition-colors"
             >

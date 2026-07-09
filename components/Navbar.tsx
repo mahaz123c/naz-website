@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Phone, Menu, X, ChevronDown, Instagram, MessageCircle } from 'lucide-react';
-import { SITE_PHONE, SITE_WHATSAPP } from '@/lib/constants';
+import { SITE_PHONE, SITE_WHATSAPP, SITE_INSTAGRAM } from '@/lib/constants';
 
 const mainLinks = [
   { href: '/', label: 'Home' },
@@ -34,7 +34,12 @@ export default function Navbar() {
             West Drayton, London &middot; Hand-selected stock, sold with confidence
           </p>
           <div className="flex items-center gap-5">
-            <a href="#" className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
+            <a
+              href={SITE_INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors"
+            >
               <Instagram size={12} /> Instagram
             </a>
             <a
