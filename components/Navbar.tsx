@@ -54,9 +54,9 @@ export default function Navbar() {
         {/* Logo + wordmark — large but clearly contained within the bar */}
         <Link href="/" className="flex items-center gap-4 shrink-0">
           <Image
-            src="/logo-ky.png"
+            src="/logo-ky2.png"
             alt="KY Automotive"
-            width={109}
+            width={97}
             height={64}
             className="h-14 md:h-16 w-auto object-contain"
             priority
