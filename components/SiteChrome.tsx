@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import SocialSidebar from './SocialSidebar';
+import FloatingContact from './FloatingContact';
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,9 +16,9 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className="min-h-screen">{children}</main>
       <Footer />
-      <SocialSidebar />
+      <FloatingContact />
     </>
   );
 }

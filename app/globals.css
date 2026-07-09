@@ -1,6 +1,56 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens.
+ * - `ink` warm near-black base, `brand` = KY accent (single source of truth:
+ *   change this scale to re-theme the whole site), `cream` near-white bg.
+ * - The legacy --color-background/surface/... tokens are kept ONLY for /admin,
+ *   which retains its own dark UI.
+ */
+/* Font tokens reference next/font CSS variables, so they must stay inline */
 @theme inline {
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-wordmark: var(--font-montserrat), system-ui, sans-serif;
+}
+
+@theme {
+  /* Ink (warm near-black) */
+  --color-ink: #0b0b0d;
+  --color-ink-50: #f6f6f7;
+  --color-ink-100: #e9e9ec;
+  --color-ink-200: #cbccd1;
+  --color-ink-300: #a0a2ab;
+  --color-ink-400: #6f7280;
+  --color-ink-500: #4d4f5b;
+  --color-ink-600: #363842;
+  --color-ink-700: #26272f;
+  --color-ink-800: #17181d;
+  --color-ink-900: #0e0e11;
+  --color-ink-950: #070708;
+
+  /* Brand accent — KY blue, sampled from the logo. Edit here to re-theme. */
+  --color-brand: #2270db;
+  --color-brand-50: #edf4fd;
+  --color-brand-100: #d7e6fa;
+  --color-brand-200: #aeccf4;
+  --color-brand-300: #7eacec;
+  --color-brand-400: #4e8ce3;
+  --color-brand-500: #2270db;
+  --color-brand-600: #1b5cb8;
+  --color-brand-700: #164a94;
+  --color-brand-800: #123a73;
+  --color-brand-900: #0c2850;
+  --color-brand-950: #071930;
+
+  /* Cream (near-white backgrounds) */
+  --color-cream: #fbfcfb;
+  --color-cream-50: #ffffff;
+  --color-cream-100: #f4f6f4;
+  --color-cream-200: #e8ebe8;
+  --color-cream-300: #d7dcd7;
+
+  /* Legacy tokens — /admin only */
   --color-background: #1A1A1A;
   --color-surface: #2D2D2D;
   --color-muted: #242424;
@@ -9,28 +59,346 @@
   --color-accent-hover: #E5C04B;
   --color-foreground: #FFFFFF;
   --color-secondary: #9CA3AF;
-  --font-sans: var(--font-poppins);
+
+  --tracking-luxe: 0.28em;
+
+  --shadow-luxe: 0 30px 60px -20px rgba(11, 11, 13, 0.35);
+  --shadow-luxe-sm: 0 18px 40px -18px rgba(11, 11, 13, 0.3);
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in-fast: fade-in-fast 0.4s ease-out both;
+  --animate-shimmer: shimmer 1.5s infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-kenburns: kenburns 18s ease-out alternate infinite;
+  --animate-brand-sweep: brand-sweep 6s linear infinite;
+  --animate-float: float 5s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in-fast {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes shimmer {
+    to { transform: translateX(100%); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.05) translate(0, 0); }
+    to { transform: scale(1.18) translate(-1.5%, -1.5%); }
+  }
+  @keyframes brand-sweep {
+    from { background-position: 200% center; }
+    to { background-position: -200% center; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b0b0d;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  background-color: var(--color-cream-50);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar styling */
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-brand-500) 25%, transparent);
+}
+
+/* Slim scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
+  background: var(--color-ink-300);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-secondary);
+  background: var(--color-ink-400);
+}
+
+/* ------------------------------------------------------------------ */
+/* Buttons                                                             */
+/* ------------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.75rem;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+.btn-primary {
+  background-color: var(--color-brand-600);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-brand-700);
+  box-shadow: 0 14px 30px -10px rgba(22, 74, 148, 0.55);
+}
+.btn-dark {
+  background-color: var(--color-ink-950);
+  color: var(--color-cream-50);
+}
+.btn-dark:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-ink-800);
+  box-shadow: var(--shadow-luxe-sm);
+}
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--color-ink-300);
+  color: var(--color-ink-900);
+}
+.btn-outline:hover {
+  background-color: var(--color-ink-950);
+  border-color: var(--color-ink-950);
+  color: var(--color-cream-50);
+}
+.btn-outline-light {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-ink-700);
+}
+.btn-ghost:hover {
+  color: var(--color-ink-950);
+  background-color: var(--color-ink-100);
+}
+.btn-whatsapp {
+  background-color: #25d366;
+  color: #ffffff;
+}
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  background-color: #1ebe5d;
+}
+
+/* ------------------------------------------------------------------ */
+/* Forms, layout primitives                                            */
+/* ------------------------------------------------------------------ */
+.input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-ink-200);
+  background-color: #ffffff;
+  color: var(--color-ink-900);
+  font-size: 0.875rem;
+  padding: 0.7rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input::placeholder {
+  color: var(--color-ink-400);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-500) 15%, transparent);
+}
+.label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-500);
+  margin-bottom: 0.375rem;
+}
+.container-px {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .container-px { padding-inline: 2rem; }
+}
+@media (min-width: 1024px) {
+  .container-px { padding-inline: 2.5rem; }
+}
+.card {
+  border-radius: 1rem;
+  background-color: #ffffff;
+  border: 1px solid var(--color-ink-100);
+  box-shadow: 0 1px 2px rgba(11, 11, 13, 0.05);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.75rem;
+}
+
+/* Eyebrow — kicker line with hairline dash */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-luxe);
+  color: var(--color-brand-600);
+}
+.eyebrow::before {
+  content: "";
+  height: 1px;
+  width: 2rem;
+  background-color: color-mix(in srgb, var(--color-brand-500) 60%, transparent);
+}
+.eyebrow-center::after {
+  content: "";
+  height: 1px;
+  width: 2rem;
+  background-color: color-mix(in srgb, var(--color-brand-500) 60%, transparent);
+}
+.eyebrow-light {
+  color: var(--color-brand-300);
+}
+
+/* Accent gradient text — pair with animate-brand-sweep + italic */
+.text-brand-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-700) 0%,
+    var(--color-brand-300) 25%,
+    var(--color-brand-500) 50%,
+    var(--color-brand-200) 70%,
+    var(--color-brand-500) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Film grain for dark ink sections */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+
+.hairline {
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, var(--color-ink-200), transparent);
+}
+
+/* Loading skeletons */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-ink-100);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Edge fade for marquees */
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll reveal (IntersectionObserver driven)                         */
+/* ------------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-up { transform: translateY(28px); }
+.reveal-down { transform: translateY(-28px); }
+.reveal-left { transform: translateX(28px); }
+.reveal-right { transform: translateX(-28px); }
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-up,
+  .reveal-down,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-marquee,
+  .animate-kenburns,
+  .animate-brand-sweep,
+  .animate-float {
+    animation: none;
+  }
 }

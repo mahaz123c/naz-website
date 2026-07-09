@@ -4,9 +4,14 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { MAKES } from '@/lib/constants';
 
-export default function ValuationForm() {
+interface ValuationFormProps {
+  interestedIn?: string;
+}
+
+export default function ValuationForm({ interestedIn }: ValuationFormProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [error, setError] = useState('');
+  const [sentName, setSentName] = useState('');
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -14,8 +19,11 @@ export default function ValuationForm() {
     setError('');
 
     const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const interested = formData.get('interested_in') as string;
+    const notes = formData.get('notes') as string;
     const data = {
-      name: formData.get('name') as string,
+      name,
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
       make: formData.get('make') as string,
@@ -24,7 +32,7 @@ export default function ValuationForm() {
       mileage: Number(formData.get('mileage')),
       registration: formData.get('registration') as string,
       condition: formData.get('condition') as string,
-      notes: formData.get('notes') as string,
+      notes: [interested ? `Interested in: ${interested}` : '', notes].filter(Boolean).join('\n'),
     };
 
     try {
@@ -34,6 +42,7 @@ export default function ValuationForm() {
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error('Failed to submit');
+      setSentName(name.split(' ')[0]);
       setStatus('success');
       (e.target as HTMLFormElement).reset();
     } catch {
@@ -44,9 +53,13 @@ export default function ValuationForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-surface border border-accent/30 rounded-lg p-8 text-center">
-        <p className="text-accent font-semibold text-lg mb-2">Valuation Request Submitted!</p>
-        <p className="text-secondary text-sm">We&apos;ll be in touch within 24 hours with a valuation for your vehicle.</p>
+      <div className="card rounded-2xl border-brand-200 bg-brand-50 p-8 text-center">
+        <p className="font-display text-lg font-semibold text-brand-800 mb-1">
+          Thanks{sentName ? `, ${sentName}` : ''}!
+        </p>
+        <p className="text-sm text-ink-600">
+          We&apos;ve received your part-exchange details and will be in touch shortly with a valuation.
+        </p>
       </div>
     );
   }
@@ -54,48 +67,69 @@ export default function ValuationForm() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input name="name" type="text" placeholder="Your Name *" required className="bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white placeholder:text-secondary focus:outline-none focus:border-white/40" />
-        <input name="email" type="email" placeholder="Email Address *" required className="bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white placeholder:text-secondary focus:outline-none focus:border-white/40" />
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div>
+        <p className="label !mb-3">Your car</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input name="registration" type="text" placeholder="Registration (optional)" className="input" />
+          <input name="mileage" type="number" placeholder="Mileage *" required className="input" />
+          <select name="make" required defaultValue="" className="input appearance-none cursor-pointer">
+            <option value="" disabled>Make *</option>
+            {MAKES.map((m) => <option key={m} value={m}>{m}</option>)}
+            <option value="Other">Other</option>
+          </select>
+          <input name="model" type="text" placeholder="Model *" required className="input" />
+          <select name="year" required defaultValue="" className="input appearance-none cursor-pointer">
+            <option value="" disabled>Year *</option>
+            {Array.from({ length: 25 }, (_, i) => currentYear - i).map((y) => (
+              <option key={y} value={y}>{y}</option>
+            ))}
+          </select>
+          <select name="condition" defaultValue="" className="input appearance-none cursor-pointer">
+            <option value="" disabled>Condition</option>
+            <option value="excellent">Excellent</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+            <option value="poor">Poor</option>
+          </select>
+        </div>
       </div>
-      <input name="phone" type="tel" placeholder="Phone Number *" required className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white placeholder:text-secondary focus:outline-none focus:border-white/40" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <select name="make" required className="bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-white/40 appearance-none">
-          <option value="">Vehicle Make *</option>
-          {MAKES.map((m) => <option key={m} value={m}>{m}</option>)}
-          <option value="Other">Other</option>
-        </select>
-        <input name="model" type="text" placeholder="Vehicle Model *" required className="bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white placeholder:text-secondary focus:outline-none focus:border-white/40" />
+      <div>
+        <p className="label !mb-3">Car you&apos;re interested in (optional)</p>
+        <input
+          name="interested_in"
+          type="text"
+          defaultValue={interestedIn || ''}
+          placeholder="e.g. the BMW 3 Series on your website"
+          className="input"
+        />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <select name="year" required className="bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-white/40 appearance-none">
-          <option value="">Year *</option>
-          {Array.from({ length: 20 }, (_, i) => currentYear - i).map((y) => (
-            <option key={y} value={y}>{y}</option>
-          ))}
-        </select>
-        <input name="mileage" type="number" placeholder="Mileage *" required className="bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white placeholder:text-secondary focus:outline-none focus:border-white/40" />
-        <input name="registration" type="text" placeholder="Registration" className="bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white placeholder:text-secondary focus:outline-none focus:border-white/40" />
+      <div>
+        <p className="label !mb-3">Your details</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <input name="name" type="text" placeholder="Your name *" required className="input" />
+          <input name="phone" type="tel" placeholder="Phone *" required className="input" />
+          <input name="email" type="email" placeholder="Email *" required className="input" />
+        </div>
       </div>
 
-      <select name="condition" className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-white/40 appearance-none">
-        <option value="">Vehicle Condition</option>
-        <option value="excellent">Excellent</option>
-        <option value="good">Good</option>
-        <option value="fair">Fair</option>
-        <option value="poor">Poor</option>
-      </select>
+      <div>
+        <p className="label !mb-3">Anything else?</p>
+        <textarea
+          name="notes"
+          placeholder="Damage, modifications, service history, outstanding finance…"
+          rows={3}
+          className="input resize-none"
+        />
+      </div>
 
-      <textarea name="notes" placeholder="Any additional notes (damage, modifications, service history, etc.)" rows={3} className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-white placeholder:text-secondary focus:outline-none focus:border-white/40 resize-none" />
+      {error && <p className="text-sm text-red-600">{error}</p>}
 
-      {error && <p className="text-red-400 text-sm">{error}</p>}
-
-      <button type="submit" disabled={status === 'loading'} className="inline-flex items-center gap-2 bg-accent text-black px-6 py-3 font-semibold text-sm rounded-lg hover:bg-accent-hover transition-colors disabled:opacity-50">
-        <Send size={16} />
-        {status === 'loading' ? 'Submitting...' : 'Get My Valuation'}
+      <button type="submit" disabled={status === 'loading'} className="btn btn-primary disabled:opacity-50">
+        <Send size={15} />
+        {status === 'loading' ? 'Submitting…' : 'Get my valuation'}
       </button>
     </form>
   );

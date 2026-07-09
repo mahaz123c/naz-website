@@ -1,9 +1,11 @@
 export default function SEOSection() {
   return (
-    <section className="bg-background py-12 px-4 md:px-8 border-t border-border">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-xl font-semibold text-white mb-4">Used Cars in Heathrow, London</h2>
-        <div className="space-y-3 text-sm text-secondary leading-relaxed">
+    <section className="bg-cream-50 border-t border-ink-100 py-14">
+      <div className="container-px max-w-4xl">
+        <h2 className="font-display text-xl font-semibold text-ink-950 mb-4">
+          Used Cars in Heathrow, London
+        </h2>
+        <div className="space-y-3 text-sm text-ink-500 leading-relaxed">
           <p>
             If you are looking for quality used cars in Heathrow, West London, and Surrey,
             KY Automotive offers a wide range of affordable luxury and sporty vehicles at competitive

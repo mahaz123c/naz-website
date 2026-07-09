@@ -1,87 +1,109 @@
-import { Phone, Smartphone, Mail, MessageCircle, MapPin, Clock } from 'lucide-react';
+import { Phone, Smartphone, Mail, MessageCircle, MapPin, Instagram, Clock } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
-import { SITE_NAME, SITE_PHONE, SITE_MOBILE, SITE_EMAIL, SITE_ADDRESS, SITE_HOURS } from '@/lib/constants';
+import PageHeader from '@/components/PageHeader';
+import Reveal from '@/components/Reveal';
+import {
+  SITE_NAME, SITE_PHONE, SITE_MOBILE, SITE_EMAIL, SITE_ADDRESS, SITE_HOURS, SITE_WHATSAPP,
+} from '@/lib/constants';
 
 export const metadata = {
   title: 'Contact Us',
-  description: `Get in touch with ${SITE_NAME}. Call us, email us, or visit our dealership.`,
+  description: `Get in touch with ${SITE_NAME}. Call, WhatsApp or visit our dealership near Heathrow, London.`,
 };
 
 export default function ContactPage() {
+  const mapQuery = encodeURIComponent(
+    `${SITE_ADDRESS.line1}, ${SITE_ADDRESS.line2}, ${SITE_ADDRESS.postcode}`
+  );
+
+  const cards = [
+    { Icon: Phone, label: 'Call us', value: SITE_PHONE, href: `tel:${SITE_PHONE.replace(/\s/g, '')}` },
+    { Icon: Smartphone, label: 'Mobile', value: SITE_MOBILE, href: `tel:${SITE_MOBILE.replace(/\s/g, '')}` },
+    { Icon: MessageCircle, label: 'WhatsApp', value: 'Message us', href: `https://wa.me/44${SITE_WHATSAPP.slice(1)}` },
+    { Icon: Mail, label: 'Email', value: SITE_EMAIL, href: `mailto:${SITE_EMAIL}` },
+    { Icon: Instagram, label: 'Instagram', value: '@kyautomotive', href: '#' },
+    {
+      Icon: MapPin,
+      label: 'Find us',
+      value: `${SITE_ADDRESS.line1}, ${SITE_ADDRESS.postcode}`,
+      href: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
+    },
+  ];
+
   return (
-    <div className="bg-background min-h-screen">
-      {/* Header */}
-      <div className="bg-surface py-12 px-4 md:px-8 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Contact Us</h1>
-        <p className="text-secondary text-sm">Get in touch with our friendly team</p>
-      </div>
+    <div className="bg-cream-50 min-h-screen">
+      <PageHeader
+        eyebrow="Get in touch"
+        title={<>Let&apos;s talk cars</>}
+        subtitle="Questions about a car, a viewing to arrange, or a test drive to book — call, message or drop in. We're a family business, so you'll always speak to someone who can actually help."
+      />
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Form */}
-          <div className="lg:col-span-2">
-            <h2 className="text-xl font-semibold text-white mb-6">Send us a message</h2>
-            <ContactForm />
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div className="bg-surface border border-border rounded-lg p-6 space-y-5">
-              <h3 className="text-lg font-semibold text-white">Get in Touch</h3>
-
-              <a href={`tel:${SITE_PHONE.replace(/\s/g, '')}`} className="flex items-center gap-3 text-sm text-secondary hover:text-white transition-colors">
-                <Phone size={18} className="text-accent shrink-0" />
-                <div>
-                  <p className="text-xs text-secondary">Landline</p>
-                  <p className="text-white">{SITE_PHONE}</p>
-                </div>
-              </a>
-
-              <a href={`tel:${SITE_MOBILE.replace(/\s/g, '')}`} className="flex items-center gap-3 text-sm text-secondary hover:text-white transition-colors">
-                <Smartphone size={18} className="text-accent shrink-0" />
-                <div>
-                  <p className="text-xs text-secondary">Mobile</p>
-                  <p className="text-white">{SITE_MOBILE}</p>
-                </div>
-              </a>
-
-              <a href={`mailto:${SITE_EMAIL}`} className="flex items-center gap-3 text-sm text-secondary hover:text-white transition-colors">
-                <Mail size={18} className="text-accent shrink-0" />
-                <div>
-                  <p className="text-xs text-secondary">Email</p>
-                  <p className="text-white">{SITE_EMAIL}</p>
-                </div>
-              </a>
-
-              <a href="#" className="flex items-center gap-3 text-sm text-secondary hover:text-white transition-colors">
-                <MessageCircle size={18} className="text-accent shrink-0" />
-                <div>
-                  <p className="text-xs text-secondary">WhatsApp</p>
-                  <p className="text-white">Message Us</p>
-                </div>
-              </a>
+      <div className="container-px py-14 lg:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          {/* Left: contact cards + hours + map */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {cards.map(({ Icon, label, value, href }, i) => (
+                <Reveal key={label} delay={Math.min(i * 50, 300)}>
+                  <a
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="card block rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-luxe-sm"
+                  >
+                    <Icon size={18} className="text-brand-600 mb-3" />
+                    <p className="text-[10px] uppercase tracking-[0.14em] text-ink-400">{label}</p>
+                    <p className="mt-0.5 text-sm font-semibold text-ink-950 break-words">{value}</p>
+                  </a>
+                </Reveal>
+              ))}
             </div>
 
-            <div className="bg-surface border border-border rounded-lg p-6 space-y-4">
-              <div className="flex items-start gap-3">
-                <MapPin size={18} className="text-accent shrink-0 mt-0.5" />
-                <div className="text-sm">
-                  <p className="text-white">{SITE_ADDRESS.line1}</p>
-                  <p className="text-secondary">{SITE_ADDRESS.line2}</p>
-                  <p className="text-secondary">{SITE_ADDRESS.line3} {SITE_ADDRESS.postcode}</p>
+            <Reveal>
+              <div className="card rounded-2xl p-6">
+                <div className="flex items-center gap-2.5 mb-4">
+                  <Clock size={16} className="text-brand-600" />
+                  <h3 className="font-display text-base font-semibold text-ink-950">Opening hours</h3>
                 </div>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex justify-between text-ink-500">
+                    <span>Monday – Saturday</span>
+                    <span className="font-medium text-ink-900">{SITE_HOURS.weekdays}</span>
+                  </li>
+                  <li className="flex justify-between text-ink-500">
+                    <span>Sunday</span>
+                    <span className="font-medium text-ink-900">{SITE_HOURS.sunday}</span>
+                  </li>
+                </ul>
+                <p className="mt-4 text-xs text-ink-400">
+                  Viewings and test drives by appointment — call ahead and we&apos;ll have the car ready.
+                </p>
               </div>
+            </Reveal>
 
-              <div className="flex items-start gap-3">
-                <Clock size={18} className="text-accent shrink-0 mt-0.5" />
-                <div className="text-sm">
-                  <p className="text-white">Opening Times</p>
-                  <p className="text-secondary">Mon - Sat: {SITE_HOURS.weekdays}</p>
-                  <p className="text-secondary">Sun: {SITE_HOURS.sunday}</p>
-                </div>
+            <Reveal>
+              <div className="overflow-hidden rounded-2xl border border-ink-100">
+                <iframe
+                  title="KY Automotive location"
+                  src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+                  className="h-64 w-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
-            </div>
+            </Reveal>
           </div>
+
+          {/* Right: message form */}
+          <Reveal direction="right" className="lg:col-span-3">
+            <div className="card rounded-2xl p-6 md:p-9">
+              <p className="eyebrow">Enquiry</p>
+              <h2 className="mt-2 mb-7 text-2xl md:text-3xl font-semibold text-ink-950 tracking-tight">
+                Send us a message
+              </h2>
+              <ContactForm />
+            </div>
+          </Reveal>
         </div>
       </div>
     </div>
